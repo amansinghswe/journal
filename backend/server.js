@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // routes
 app.use("/", indexRouter);
-app.use("/v1/users", usersRouter);
+app.use("/users", usersRouter);
 
 // database connection with retry mechanism
 const connectDB = async (retries = 5, delay = 5000) => {

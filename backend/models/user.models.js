@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 
 const USER = new mongoose.Schema({
     googleId: {type: String},
@@ -17,7 +20,7 @@ USER.statics.isValidPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-USER.statics.generateJWT = async function () {
+USER.methods.generateJWT = async function () {
     return jwt.sign({email: this.email}, process.env.JWT_SECRET);
 }
 
