@@ -35,7 +35,30 @@ async function createUserController(request, response, next) {
     }
 }
 
+async function loginUserController(request, response) {
+    try {
+        const errors = validationResult(request);
+
+        if (!errors.isEmpty()) {
+            return response.status(400).json({ errors: errors.array() });
+        }
+        const userData = {
+            email: request?.body?.email,
+            password: request?.body?.password
+        };
+        const user = await userService.loginUser(userData);
+
+        const token = await user.generateJWT();
+
+        response.status(200).json({user, token});
+    } catch (error) {
+        console.log("Error logging in user: ", error.message);
+        response.status(500).json({message: error.message});
+    }
+}
+
 export {
     indexRoute as indexRoute,
-    createUserController as createUserController
+    createUserController as createUserController,
+    loginUserController as loginUserController
 }

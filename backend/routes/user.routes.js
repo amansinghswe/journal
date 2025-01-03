@@ -11,4 +11,6 @@ UserRouter.post("/v1/register",
     body("password").isLength({min: 6}).withMessage("Password must be at least 6 characters"),
     userController.createUserController);
 
+UserRouter.post("/v1/login", userController.loginUserController);
+
 export default UserRouter;

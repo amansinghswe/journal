@@ -21,6 +21,11 @@ async function createUser(userData) {
     }
 }
 
+async function loginUser (userData) {
+    // Todo : Write Logic to login user
+}
+
 export {
-    createUser as createUser
+    createUser as createUser,
+    loginUser as loginUser
 }
